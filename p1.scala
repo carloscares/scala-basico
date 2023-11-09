@@ -6,7 +6,7 @@ object PalabraConMasVocales {
     palabra.toLowerCase.count(c => "aeiou".contains(c))
   }
 
-  def palabraConMasVocales(palabras: Array[String]): String = {
+  def palabraConMasVocales(palabras: List[String]): String = {
     if (palabras.isEmpty) {
       "No se proporcionaron palabras."
     } else {
@@ -15,11 +15,12 @@ object PalabraConMasVocales {
   }
 
   def main(args: Array[String]): Unit = {
-    if (args.nonEmpty) {
-      val palabraResultante = palabraConMasVocales(args)
-      println(s"La palabra con más vocales es: $palabraResultante")
-    } else {
-      println("Por favor, proporciona una lista de palabras como argumentos.")
-    }
+    println("Ingresa palabras, una por línea. Presiona Ctrl+D (Unix/Linux) o Ctrl+Z (Windows) para finalizar la entrada.")
+    
+    // Lee las palabras de la entrada estándar
+    val inputWords = scala.io.Source.stdin.getLines().toList
+    
+    val palabraResultante = palabraConMasVocales(inputWords)
+    println(s"La palabra con más vocales es: $palabraResultante")
   }
 }
