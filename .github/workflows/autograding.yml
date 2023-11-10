@@ -1,0 +1,28 @@
+name: Autograding
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  autograde:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK and SBT
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Install SBT
+      run: |
+        sudo apt-get install sbt
+
+    - name: Run Autograder
+      run: |
+        sbt test
